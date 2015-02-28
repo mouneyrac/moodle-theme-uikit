@@ -1,0 +1,398 @@
+/* BODY COLOR */
+html, body, #page, #page-content, .uk-grid, #region-bs-main-and-pre, #pre-and-content, #region-main-uikit, #region-main,
+#main-content-box {
+/*height: 100%;*/
+}
+
+/* TEST SECTION */
+#page-navigation {
+/*display: none;*/
+}
+
+/* Course contents block*/
+.block_course_contents  {
+text-align: left;
+font-size: 0.8em;
+}
+.block_course_contents .section-item {
+list-style: none;
+list-style-image: none;
+}
+.block_course_contents .section-list {
+margin: 0px;
+padding-left: 0px;
+}
+.block_course_contents .section-number {
+font-size: 1.2em;
+}
+.block_course_contents .section-item.r0 {
+margin-bottom: 10px;
+margin-top: 10px;
+}
+
+/* Bookshelf */
+.bookshelf {
+z-index: 1;
+margin: 0;
+}
+.bookshelf figure {
+margin: 0;
+}
+.bookshelf figure::after {
+background: rgba(255, 255, 255, 1);
+}
+.bookshelf figure .details a, .bookshelf figure .details a:active, .bookshelf figure .details a:hover {
+color: #00a8e6;
+}
+.bookshelf .buttons {
+display: none;
+}
+.bookshelf .cover {
+cursor: pointer;
+}
+@media all and (max-width: 400px){
+.csstransformspreserve3d .details ul {
+ padding: 60px 30px 0 30px;
+}
+}
+
+/* Disable touch highlight */
+body {
+-webkit-tap-highlight-color: rgba(0,0,0,0); 
+}
+
+/* Footer jump menu and arrows */
+.jumpmenu {
+display: none;
+}
+.section-navigation.mdl-bottom .larrow, .section-navigation.mdl-bottom .rarrow {
+font-size: 3em;
+margin: 10px;
+}
+
+/* SIDE-POST */
+#menu-right-offcanvas .uk-offcanvas-bar-flip .uk-panel {
+margin: 0px 0px;
+}
+
+.tabs-style-fillup nav ul li a {
+border-right: #00a8e6;
+}
+
+.tabs-style-fillup nav ul li a::after {
+border: #00a8e6;
+background:#00a8e6;
+}
+
+.tabs-style-fillup a {
+color: #00a8e6;
+}
+.tabs-style-fillup nav ul li a span {
+display: block;
+font-weight: 100;
+font-size: 0.9em;
+line-height: 1.5;
+text-decoration: none;
+}
+.tabs-style-fillup nav ul li a:link, 
+.tabs-style-fillup nav ul li a:visited,
+.tabs-style-fillup nav ul li a:active {
+text-decoration: none;
+}
+
+/* BLOCK-XP */
+.content-wrap section p {
+font-weight: 100;
+font-size: 1em;
+}
+.block_xp-level-progress .bar {
+background-color: #00a8e6;
+}
+.block_xp .description {
+color: #E9E9E9;
+}
+
+
+/* NAV BAR */
+.uk-navbar-toggle:after {
+content: "\f1b0";
+}
+.uk-navbar-toggle {
+font-size: inherit;
+}
+#page-navigation .uk-sticky-placeholder {
+background: #eee;
+}
+header .uk-sticky-placeholder #navbar-uikit-theme , .uk-sticky-placeholder #navbar-uikit-theme .uk-navbar-toggle{
+height: 45px;
+}
+.uk-sticky-placeholder #navbar-uikit-theme .uk-navbar-toggle::after {
+font-size: 20px;
+}
+.uk-sticky-placeholder #navbar-uikit-theme .uk-navbar-toggle.coursemenulabel::after {
+margin-left: 5px;
+}
+
+/* course menu label */
+.coursemenulabel {
+float: right;
+}
+.coursemenulabel.uk-navbar-toggle:after {
+content: "\f0c9";
+}
+
+/* Change font familly */
+body.theme_uikit {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* DO NOT DISPLAY HEADER */
+header#page-header {
+display: none;
+}
+
+/* DISPLAY THE NAVBAR UNDER THE FILE PICKER */
+#navbar-uikit-theme {
+z-index: 3;
+}
+
+/* FIX LOGIN PAGE */
+.loginbox.twocolumns .signuppanel,.loginbox.twocolumns .loginpanel {
+width: 100%;
+margin-bottom: 0px;
+padding-bottom: 0px
+}
+
+
+/* FIX FILE PICKER */
+@media all and (max-width: 872px){
+body.moodle26plus .file-picker .fp-repo-area, body.moodle26plus .file-picker .fp-repo-items {
+width:100%;
+}
+body.moodle26plus .file-picker .fp-repo-area {
+height: 325px;
+}
+.filepicker {
+z-index:999;
+}
+}
+
+/* DO NOT DISPLAY THE SECTION 0 */
+#section-0 {
+ display:none;
+}
+
+/* DO NOT DISPLAY THE PREVIOUS/NEXT PAGE LINKS ON THE TOP */
+#main-content-box > div > div > div > div.section-navigation.navigationtitle > span.mdl-right {
+display: none;
+}
+#main-content-box > div > div > div > div.section-navigation.navigationtitle > span.mdl-left {
+display: none;
+}
+
+
+/* REMOVE CRUMBTRAIL */
+#page-navbar {
+display: none;
+}
+
+/* REMOVE THE WHITE BORDER OF THE CONTENT */
+#page-course-view-topics #page {
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 00px;
+}
+/* MORE SPACE REMOVE FOR MOBILE ONLY */
+@media all and (max-width: 600px){
+.course-content ul.topics li.section .content, .course-content ul.weeks li.section .content {
+margin-right: 0px;
+margin-left: 0px;
+}
+.course-content ul.topics li.section .summary {
+ margin-left: 0px;
+}
+.course-content ul.topics li.section .left, .course-content ul.topics li.section .right {
+ width: 0px; 
+}
+}
+
+/* CENTER THE CONTENT */
+.course-content ul.topics {
+padding-left: 0px;
+}
+
+/* REMOVE THE WHITE SPACE AT THE BOTTOM OF THE PAGE */
+.uk-margin-bottom {
+margin-bottom: 0px !important;
+}
+
+/* REMOVE FOOTER */
+footer, #theme_switch_link {
+display: none;
+}
+
+/* completion box position */
+.section .activity .actions {
+ position: relative;
+}
+.section .label .contentwithoutlink {
+min-height: 0px;
+height: 0px;
+margin-left: 25px;
+}
+
+/* REMOVE progress completiontexthelp */
+#completionprogressid {
+display: none;
+}
+
+/* REMOVE TEXT BEFORE THE ARROWS LEFT AND RIGHT */
+.course-content .single-section .section-navigation .mdl-left .larrow {
+font-size: xx-large;
+}
+.course-content .single-section .section-navigation .mdl-left a {
+font-size: 0;
+}
+.course-content .single-section .section-navigation .mdl-right .rarrow {
+font-size: xx-large;
+}
+.course-content .single-section .section-navigation .mdl-right a {
+font-size: 0;
+}
+
+/* REMOVE SHADOW FROM TOP BAR */
+.uk-sticky-placeholder #navbar-uikit-theme.uk-active {
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+/* REMOVE THE SCROLL TO TOP BUTTON */
+.smoothScroll {
+display: none;
+}
+
+/* BLOCK CSS IN THE OFF CANVAS MENU */
+#block-region-side-pre, #menu-offcanvas.uk-offcanvas .uk-panel-box, .uk-offcanvas .uk-panel, .block .header .uk-panel-title h2, 
+.block .header .uk-panel-title h2:before {
+background: #333333;
+color: #E9E9E9;
+}
+
+/* Menu Hamburger just be diosplay on the left side always */
+#navbar-uikit-theme-content{
+    margin-left: 0px;
+    max-width: 100%;
+}
+
+.loginbox .signupform {
+ margin-top: 0px; 
+}
+
+.signuppanel .text_to_html{
+display: none;
+}
+
+/* SPINNING KEY FRAME */
+.spinme {
+   -webkit-animation-name: spin;
+    -webkit-animation-duration: 1500ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 1500ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 1500ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+/* NPROGRESS */
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #29d;
+
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 100;
+  top: 15px;
+  right: 15px;
+}
+
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: #29d;
+  border-left-color: #29d;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+       

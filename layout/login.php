@@ -39,7 +39,9 @@
 		<?php require_once(dirname(__FILE__).'/includes/googlefonts.php'); ?>
         <!-- iOS Homescreen Icons -->
         <?php require_once(dirname(__FILE__).'/includes/iosicons.php'); ?>
-    </head>
+      <link rel="stylesheet" type="text/css" href="<?php echo $CFG->httpswwwroot?>/theme/uikit/style.css">
+
+   </head>
 
     <body <?php echo $OUTPUT->body_attributes(); ?>>
 
@@ -54,6 +56,7 @@
             <div id="page-content" class="uk-grid">
                 <section id="region-main" class="uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 uk-container-center">
 					<div id="main-content-box">
+<?php require_once($CFG->dirroot . '/auth/googleoauth2/lib.php'); auth_googleoauth2_display_buttons(); ?>
 						<?php
 							echo $OUTPUT->main_content();
 						?>
@@ -68,6 +71,21 @@
         <?php echo $OUTPUT->standard_footer_html(); ?>
 
         <?php echo $OUTPUT->standard_end_of_body_html() ?>
+<script>
+$('a').click(
+    function() {
+        if ($(this).attr('href').charAt(0) == '#') {
+            console.log('internal link');
+        } else {
+            $('#navbar-uikit-theme-content .uk-navbar-toggle:not(.coursemenulabel)').addClass('spinme');
+            $('#menu-offcanvas .uk-icon-home').addClass('spinme');
+        }
+     }
+);
+
+
+</script>
+
 
         <!-- Start Google Analytics -->
         <?php require_once(dirname(__FILE__).'/includes/analytics.php'); ?>

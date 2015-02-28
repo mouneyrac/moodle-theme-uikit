@@ -23,6 +23,11 @@
  * @author     Based on code originally written by Julian (@moodleman) Ridden, G J Bernard, Mary Evans, Bas Brands, Stuart Lamour and David Scotson.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+require_once(dirname(__FILE__) . '/../lib.php');
+hook_before_display();
+
+
 $pre = 'side-pre';
 $post = 'side-post';
 $rtl = right_to_left();
@@ -40,11 +45,11 @@ if ($rtl) {
 $hassidepre = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->region_has_content('side-pre', $OUTPUT));
 $hassidepost = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->region_has_content('side-post', $OUTPUT));
 
-$preClass = 'uk-width-1-1 uk-width-medium-3-10 uk-width-large-3-10 mdl-width-xlarge-1-4';
-$contentClass = 'uk-width-1-1 uk-width-medium-7-10 uk-width-large-7-10 mdl-width-xlarge-3-4';
+$preClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
+$contentClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
 
-$regionClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-3-4 mdl-width-xlarge-8-10';
-$postClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-4 mdl-width-xlarge-2-10';
+$regionClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
+$postClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
 
 if(!$hassidepre){
     $contentClass = 'uk-width-1-1';
@@ -54,32 +59,40 @@ if(!$hassidepost){
     $regionClass = 'uk-width-1-1';
     
     if($hassidepre){
-        $preClass = 'uk-width-1-1 uk-width-medium-1-3 uk-width-large-1-4 mdl-width-xlarge-2-10';
-        $contentClass = 'uk-width-1-1 uk-width-medium-2-3 uk-width-large-3-4 mdl-width-xlarge-8-10';
+        $preClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
+        $contentClass = 'uk-width-1-1 uk-width-medium-1-1 uk-width-large-1-1 mdl-width-xlarge-1-1';
     }
 }
 
 $preClass .= ' content-pre';
-
-echo $OUTPUT->doctype()
+$PAGE->requires->jquery();
+echo $OUTPUT->doctype();
 ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
     <head>
         <title><?php echo $OUTPUT->page_title(); ?></title>
         <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>" />
         <?php echo $OUTPUT->standard_head_html() ?>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Google web fonts -->
 		<?php require_once(dirname(__FILE__).'/includes/googlefonts.php'); ?>
         <!-- iOS Homescreen Icons -->
         <?php require_once(dirname(__FILE__) . '/includes/iosicons.php'); ?>
-    </head>
+<!--
+  <link rel="stylesheet" type="text/css" href="<?php echo $CFG->httpswwwroot?>/theme/uikit/style/demo.css">
+--> 
+<link rel="stylesheet" type="text/css" href="<?php echo $CFG->httpswwwroot?>/theme/uikit/style/tabs.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo $CFG->httpswwwroot?>/theme/uikit/style/tabstyle.css">
+ <link rel="stylesheet" type="text/css" href="<?php echo $CFG->httpswwwroot?>/theme/uikit/style.css">
+   </head>
 
     <body <?php echo $OUTPUT->body_attributes(); ?>>
 
         <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-        <?php require_once(dirname(__FILE__) . '/includes/header.php'); ?>
+        <?php //require_once(dirname(__FILE__) . '/includes/header.php'); ?>
 
         <?php require_once(dirname(__FILE__) . '/includes/navbar.php'); ?>
 
@@ -89,7 +102,7 @@ echo $OUTPUT->doctype()
                 <div class="uk-grid">
                     <div id="<?php echo $regionbsid ?>" class="<?php echo $regionClass; ?> uk-margin-bottom">
                         <div id="pre-and-content" class="uk-grid">
-                            <?php if($hassidepre){echo $OUTPUT->uikitblocks($pre, $preClass);} ?>
+                            <?php //if($hassidepre){echo $OUTPUT->uikitblocks($pre, $preClass);} ?>
                             <div id="region-main-uikit" class="<?php echo $contentClass; ?>">
                                 <section id="region-main" class="uk-margin-bottom">
                                     <?php if(empty($PAGE->layout_options['nobreadcrumbs'])){ ?>
@@ -109,7 +122,7 @@ echo $OUTPUT->doctype()
                             </div>
                         </div>
                     </div>
-                    <?php if($hassidepost) {echo $OUTPUT->uikitblocks($post, $postClass);} ?>
+                    <?php //if($hassidepost) {echo $OUTPUT->uikitblocks($post, $postClass);} ?>
                 </div>
             </div>
         </div>
@@ -126,9 +139,48 @@ echo $OUTPUT->doctype()
         <?php echo $OUTPUT->standard_footer_html(); ?>
 
         <?php echo $OUTPUT->standard_end_of_body_html(); ?>
+
+<!--script>
+    $('body').show();
+    $('.version').text(NProgress.version);
+    NProgress.start();
+    setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+
+    $("#b-0").click(function() { NProgress.start(); });
+    $("#b-40").click(function() { NProgress.set(0.4); });
+    $("#b-inc").click(function() { NProgress.inc(); });
+    $("#b-100").click(function() { NProgress.done(); });
+</script-->
+
+<script>
+$('a').click(
+    function() {
+        if ($(this).attr('href').charAt(0) == '#') {
+            console.log('internal link');
+        } else {
+            $('#navbar-uikit-theme-content .uk-navbar-toggle:not(.coursemenulabel)').addClass('spinme');
+            $('#menu-offcanvas .uk-icon-home').addClass('spinme');
+        }
+     }
+);
+
+
+</script>
+
         
         <!-- Start Google Analytics -->
         <?php require_once(dirname(__FILE__).'/includes/analytics.php'); ?>
         <!-- End Google Analytics -->
+<script src="/theme/uikit/javascript/cbpFWTabs.js"></script>
+		<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+		</script>
+
     </body>
 </html>

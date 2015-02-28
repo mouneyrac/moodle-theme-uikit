@@ -803,8 +803,73 @@ class theme_uikit_core_renderer extends core_renderer {
             'data-blockregion' => $region,
             'data-droptarget' => '1'
         );
+
         return html_writer::tag($tag, $this->blocks_for_region($region), $attributes);
     }
+
+public function blocks_for_region($region) {
+
+if ($region == 'side-post') {
+
+// icons list
+$iconlist = array('xp' => 'star', 'comments' => 'comments', 'course_contents' => 'graduation-cap', 'activity_modules' => 'graduation-cap');
+
+$tabsections = array();	
+$blockcontents = $this->page->blocks->get_content_for_region($region, $this);
+        $blocks = $this->page->blocks->get_blocks_for_region($region);
+        $lastblock = null;
+        $zones = array();
+        foreach ($blocks as $block) {
+            $zones[] = $block->title;
+        }
+        $output = '';
+$tabnumber = 1;
+        foreach ($blockcontents as $bc) {
+            if ($bc instanceof block_contents) {
+//                $output .= $this->block($bc, $region);
+  //              $lastblock = $bc->title;
+$tabcurrent = '';
+if ($tabnumber == 1) {
+$tabcurrent = 'tab-current';
+}
+
+$sectionheader = '<li class="'.$tabcurrent.'"><a href="#section-fillup-'.$tabnumber.'" class="icon uk-icon-'.$iconlist[$bc->attributes['data-block']].'"><span>'.$bc->title.'</span></a></li>';
+
+			$sectioncontent = '		<section id="section-fillup-'.$tabnumber.'" class="">';
+$sectioncontent .= $this->block($bc, $region);
+$sectioncontent .= '</section>';
+$tabsections[] = array('header' => $sectionheader, 'content' => $sectioncontent);
+$tabnumber = $tabnumber +1;
+            } else if ($bc instanceof block_move_target) {
+    //            $output .= $this->block_move_target($bc, $zones, $lastblock, $region);
+            } else {
+                throw new coding_exception('Unexpected type of thing (' . get_class($bc) . ') found in list of block contents.');
+            }
+        }
+$html = '
+<div class="tabs tabs-style-fillup">
+					<nav>
+						<ul>';
+foreach($tabsections as $section) {
+$html .= $section['header'];
+}
+					$html .= '	</ul>
+					</nav>
+					<div class="content-wrap">
+';
+foreach($tabsections as $section) {
+$html .= $section['content'];
+}
+$html .= '					</div><!-- /content -->
+				</div>
+';
+
+return $html; 
+}
+
+$html = parent::blocks_for_region($region);
+return $html;
+}
 
     /**
      * Returns HTML to display a "Turn editing on/off" button in a form.
@@ -930,7 +995,9 @@ class theme_uikit_core_renderer extends core_renderer {
             $bc->attributes['aria-label'] = $bc->arialabel;
         }
         if ($bc->collapsible == block_contents::HIDDEN) {
+if ($region != 'side-post') {
             $bc->add_class('hidden');
+}       
         }
         if (!empty($bc->controls)) {
             $bc->add_class('block_with_controls');
@@ -944,8 +1011,10 @@ class theme_uikit_core_renderer extends core_renderer {
         $output = '';
 
         $output .= html_writer::start_tag('div', $bc->attributes);
+if ($region != 'side-post') {
 
         $output .= $this->block_header($bc);
+}
         $output .= $this->block_content($bc);
 
         $output .= html_writer::end_tag('div');

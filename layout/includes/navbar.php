@@ -28,38 +28,71 @@ $displaysitename = isset($PAGE->theme->settings->displaysitename) ? $PAGE->theme
 $displayloggedusermode = isset($PAGE->theme->settings->displayloggedusermode) ? $PAGE->theme->settings->displayloggedusermode : 0;
 
 ?>
+               <?php
+$context = $PAGE->context;
+$contextsystem = context_system::instance();
+if ($context->id != $contextsystem->id 
+    and (($context instanceof context_course and $context->id != 2) or $context instanceof context_module)) {
+$coursecontext = $context->get_course_context();
+// current course id
+$courseid = $coursecontext->instanceid;
+//$modinfo = get_fast_modinfo($courseid);        
+//$sections = $modinfo->get_section_info_all();
+$course = get_course($courseid);
+$thecourseshortname = $course->shortname;
+}               
+?>
+ 
+
+
+
 <header id="page-navigation" role="navigation">
     <nav id="navbar-uikit-theme" role="navigation" class="uk-navbar" data-uk-sticky>
         <div id="navbar-uikit-theme-content">
             <div class="uk-visible-large">
-                <?php if($displaysitename){ ?>
+                <?php if(false && $displaysitename){ ?>
                     <a class="uk-navbar-brand sitename" href="<?php echo $CFG->wwwroot; ?>"><i class="uk-icon-home"></i>&nbsp;<?php echo $SITE->shortname; ?></a>
                 <?php } ?>
                     
-                <?php echo $OUTPUT->custom_menu(); ?>
+                <?php //echo $OUTPUT->custom_menu(); ?>
                 <div class="uk-navbar-flip">
                     <div class="uk-navbar-content">
-                        <?php echo $OUTPUT->login_info(null, $displayloggedusermode) ?>
+                        <?php  // echo $OUTPUT->login_info(null, $displayloggedusermode) ?>
                     </div>
                 </div>
+
+               <a class="uk-navbar-toggle" href="#menu-offcanvas" data-uk-offcanvas></a>
+<?php  
+            if (!empty($thecourseshortname)) { 
+?>     
+         <a class="uk-navbar-toggle coursemenulabel" href="#menu-right-offcanvas" data-uk-offcanvas> <?php echo $thecourseshortname ?> </a>
+<?php
+}
+?>
                 <div class="uk-navbar-content uk-navbar-center">
                     <ul class="uk-navbar-nav">
-                        <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
+                        <li><?php //echo $OUTPUT->page_heading_menu(); ?></li>
                     </ul>
                 </div>
             </div>
             <!-- Off-canvas menu for small devices -->
             <div class="uk-hidden-large">
-                <?php if($displaysitename){ ?>
+                <?php if(false && $displaysitename){ ?>
                     <a class="uk-navbar-brand uk-hidden-small sitename" href="<?php echo $CFG->wwwroot; ?>"><i class="uk-icon-home"></i>&nbsp;<?php echo $SITE->shortname; ?></a>
                 <?php } ?>
                 
                 <!-- This is a button toggling the off-canvas sidebar -->
                 <a class="uk-navbar-toggle" href="#menu-offcanvas" data-uk-offcanvas></a>
-
+<?php  
+            if (!empty($thecourseshortname)) { 
+?>     
+         <a class="uk-navbar-toggle coursemenulabel" href="#menu-right-offcanvas" data-uk-offcanvas> <?php echo $thecourseshortname ?> </a>
+<?php
+}
+?>
                  <div class="uk-navbar-flip uk-hidden-small">
                     <div class="uk-navbar-content">
-                        <?php echo $OUTPUT->login_info(null, $displayloggedusermode) ?>
+                        <?php //echo $OUTPUT->login_info(null, $displayloggedusermode); ?>
                     </div>
                 </div>
             </div>
@@ -75,5 +108,20 @@ $displayloggedusermode = isset($PAGE->theme->settings->displayloggedusermode) ? 
             <?php echo $OUTPUT->login_info(null, $displayloggedusermode); ?>
         </div>
         <?php echo $OUTPUT->custom_menu('', true); ?>
+<?php if(false && !empty($hassidepre)){echo $OUTPUT->uikitblocks($pre, $preClass);} ?>
+
     </div>
 </div>
+
+<!-- This is theright  off-canvas sidebar -->
+<div id="menu-right-offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
+        <div class="uk-panel">
+        <?php if(!empty($hassidepost)){echo $OUTPUT->uikitblocks($post, $postClass);} ?>
+
+
+        </div>
+
+    </div>
+</div>
+

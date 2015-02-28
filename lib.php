@@ -21,6 +21,24 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+function hook_before_display() {
+       global $PAGE, $CFG; 
+
+       // Only modify the css or redirect if we are not an admin.
+//        if (!has_capability('moodle/site:config', context_system::instance())) {
+            $sitefileurl = $PAGE->url->out_omit_querystring();
+            if(strpos($sitefileurl, '/course/view.php') !== false) {
+                // Check that the user is either in the feedback module, either in the local plugin.
+                // Otherwise the user is somewhere he should not be.
+             $section = optional_param('section', 0, PARAM_INT);
+             if(empty($section)) {
+                 $courseid = required_param('id', PARAM_INT);
+                 redirect($CFG->wwwroot . '/course/view.php?section=1&id='.$courseid);
+                 }
+             }
+//        }
+}
+
 /**
  * Include the Awesome Font.
  */
@@ -289,4 +307,6 @@ function theme_uikit_process_css($css, $theme) {
 
 function theme_uikit_page_init(moodle_page $page) {
     $page->requires->jquery();
+    $page->requires->jquery_plugin('nprogress', 'theme_uikit');
+    $page->requires->jquery_plugin('fitvids', 'theme_uikit');
 }
